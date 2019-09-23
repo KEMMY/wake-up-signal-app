@@ -117,6 +117,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         
       //  perform(#selector(advanced, with: nil))
       //  startNewYourney(userID: uid)
+        
      
     }
     
@@ -215,6 +216,25 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         
         alarmSoundPlayer?.stop()
         
+    }
+    
+    @objc func handleEmergency(emergencyMessage: String) {
+        let alertController = UIAlertController(title: "Warning this is an Emergency message!", message: emergencyMessage, preferredStyle: .actionSheet)
+        self.startArlarm()
+        print(">>>>>>>>>>Started To Play Sound >>>>>>>>>>>>")
+        
+        alertController.view.subviews.last?.subviews.first?.subviews.last?.backgroundColor = UIColor.rgb(red: 255, green: 179, blue: 179)
+        let AlarmTintColor = UIColor.rgb(red: 255, green: 0, blue: 0)
+        alertController.view.tintColor = AlarmTintColor
+        
+        alertController.addAction(UIAlertAction(title: "Stop Warning", style: .cancel, handler: { (_) in
+            self.stopAlarm()
+            
+        }))
+        
+        // alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alertController, animated: true, completion: nil)
+        //UIDevice.vibrate(duration: 2)
     }
         
     
@@ -318,6 +338,13 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         }
         if fl < 100.1 && fl > 89.2 {
             str = "Low"
+        }
+        
+        
+        if WakeUpManager.shared.fatique > 89.00 {
+            
+            handleAlarm()
+            //startArlarm()
         }
         
         let attributedText = NSMutableAttributedString(string: String(WakeUpManager.shared.fatique)+"%\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])

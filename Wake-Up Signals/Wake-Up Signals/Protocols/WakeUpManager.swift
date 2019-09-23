@@ -20,6 +20,8 @@ public class WakeUpManager{
     var newJourneyID:String = ""
     var wasNewJourneyTrigered: Bool = false
     var fatique:Double = 0.0
+    var emergency:Bool = false
+    var emergencyMessage: String = ""
     
     init(){}
     
