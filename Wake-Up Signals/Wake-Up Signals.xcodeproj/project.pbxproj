@@ -40,6 +40,7 @@
 		4953BD8D2324E19C008FA30B /* alarmSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4953BD8C2324E19B008FA30B /* alarmSound.mp3 */; };
 		4953BD912324E54B008FA30B /* Vibration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4953BD902324E54B008FA30B /* Vibration.swift */; };
 		4953BD932325236D008FA30B /* JourneyRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4953BD922325236D008FA30B /* JourneyRecord.swift */; };
+		49644C472338671F007DC3FA /* EmergencyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49644C462338671F007DC3FA /* EmergencyJSON.swift */; };
 		AD101DBFC85568D2399C479E /* Pods_Wake_Up_Signals.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9C3CC4170C3AC819DFA8498 /* Pods_Wake_Up_Signals.framework */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +81,7 @@
 		4953BD8C2324E19B008FA30B /* alarmSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alarmSound.mp3; sourceTree = "<group>"; };
 		4953BD902324E54B008FA30B /* Vibration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vibration.swift; sourceTree = "<group>"; };
 		4953BD922325236D008FA30B /* JourneyRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyRecord.swift; sourceTree = "<group>"; };
+		49644C462338671F007DC3FA /* EmergencyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyJSON.swift; sourceTree = "<group>"; };
 		58E565CCE425405D4A7E9D20 /* Pods-Wake-Up Signals.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wake-Up Signals.release.xcconfig"; path = "Pods/Target Support Files/Pods-Wake-Up Signals/Pods-Wake-Up Signals.release.xcconfig"; sourceTree = "<group>"; };
 		7EEF77ABBC424A81EF5A2BD6 /* Pods-Wake-Up Signals.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wake-Up Signals.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Wake-Up Signals/Pods-Wake-Up Signals.debug.xcconfig"; sourceTree = "<group>"; };
 		A9C3CC4170C3AC819DFA8498 /* Pods_Wake_Up_Signals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wake_Up_Signals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -174,6 +176,7 @@
 				4953BD8A23223757008FA30B /* UserProfileCell.swift */,
 				4953BD922325236D008FA30B /* JourneyRecord.swift */,
 				490F9C2B23362A6600D93885 /* FatiqueJSON.swift */,
+				49644C462338671F007DC3FA /* EmergencyJSON.swift */,
 				4925DDFF23332B1D005F68E3 /* UsefulCode.swift */,
 			);
 			path = UserProfile;
@@ -362,6 +365,7 @@
 				4953B6D322FE4271008FA30B /* Extensions.swift in Sources */,
 				4953B6FB231CE44A008FA30B /* Streets.swift in Sources */,
 				4953BD912324E54B008FA30B /* Vibration.swift in Sources */,
+				49644C472338671F007DC3FA /* EmergencyJSON.swift in Sources */,
 				4953BD932325236D008FA30B /* JourneyRecord.swift in Sources */,
 				4925DE0023332B1D005F68E3 /* UsefulCode.swift in Sources */,
 				4953BD8923222C68008FA30B /* DateExtention.swift in Sources */,
@@ -536,7 +540,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q8G8Q32W3S;
 				INFOPLIST_FILE = "Wake-Up Signals/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -557,7 +561,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q8G8Q32W3S;
 				INFOPLIST_FILE = "Wake-Up Signals/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

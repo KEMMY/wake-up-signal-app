@@ -81,6 +81,16 @@ public class WakeUpManager{
         fatique = newValue
     }
     
+    func setEmergency(newValue: Bool){
+        emergency = newValue
+    }
+    
+    func setEmergencyMessage(newValue: String){
+        emergencyMessage = newValue
+    }
+    
+    
+    
     func newJourneyON() {
         wasNewJourneyTrigered = true
     }

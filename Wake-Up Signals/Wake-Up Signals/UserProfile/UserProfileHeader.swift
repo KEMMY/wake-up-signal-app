@@ -159,11 +159,30 @@ class UserProfileHeader: UICollectionViewCell {
     @objc fileprivate func handleNewJourney() {
         print(">>>>>>>>>>>>>>>>> New Journey Button Was Pressed >>>>>>>>>>>>>>")
         print(">>> Adding New Journey Into WakeUpManager >>>")
+       
+        let fl:Double = WakeUpManager.shared.fatique
+        var str:fatique = .Low
+        if fl < 19.1 {
+            str = .VeryLow
+        }
+        
+        if fl < 39.1 && fl > 19.2 {
+            str = .Low
+        }
+        if fl < 69.1 && fl > 39.2 {
+            str = .Moderate
+        }
+        if fl < 89.1 && fl > 69.2 {
+            str = .High
+        }
+        if fl < 100.1 && fl > 89.2 {
+            str = .VeryHigh
+        }
         
         let data:String = WakeUpManager.shared.requestDHRHash() + randomString(length: 16) // randomString is like Salt
         let md5Data = MD5(string:data)
         let md5Hex =  md5Data.map { String(format: "%02hhx", $0) }.joined()
-        let newJourney = JourneyRecord(journeyId: md5Hex, journeyType: .yellow, duration: "Click to End Journey", fatiqueLevel: .Low, fatiqueValue: 0.0)
+        let newJourney = JourneyRecord(journeyId: md5Hex, journeyType: .yellow, duration: "Click to End Journey", fatiqueLevel: str , fatiqueValue: WakeUpManager.shared.fatique)
         WakeUpManager.shared.JL.insert(newJourney, at: 0)
         print(newJourney.journeyId)
         WakeUpManager.shared.newJourneyON() //turn On new Journey

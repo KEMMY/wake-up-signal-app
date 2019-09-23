@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Alamofire
 
 class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -115,6 +116,11 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
             }
             
             print("Successfully created user:", user?.uid ?? "")
+            
+            // set up driver_fatique
+            let newID:String = user?.uid ?? "New_User"
+            
+            fatiqueInitID(userID: newID, initTirednessLevel: 26.03) // base tiredness level when created new user
             
             guard let image = self.plusPhotoButton.imageView?.image else { return }
             
@@ -240,4 +246,16 @@ extension UIView {
         }
     }
     
+}
+
+func fatiqueInitID(userID: String, initTirednessLevel: Double){ // initTirednessLevel is only temporary, for demonstration purposes
+    let parameters: Parameters = [
+        "uid": userID, // String
+        "fatigue": initTirednessLevel // double
+    ]
+    print(">>>>>>>>>>>>>>>>>>>> JSON REQUEST BODY >>>>>>>>>>>>>>>>")
+    Alamofire.request("https://wake-up-api.herokuapp.com/driver_fatigue", method: .post, parameters: parameters).responseJSON { response in
+        print(">>>>>>>>>>> RESPONSE >>>>>>>>>>>>")
+        print(response)
+    }
 }

@@ -33,7 +33,6 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         //getJourneyHistoryForID()
         
         
-        
         // HealthRecord From HealthControllerView as shared resource
         var HProfile = DriverHealthProfile()
         HProfile = WakeUpManager.shared.requestForHealthProfile()
@@ -320,7 +319,10 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerId", for: indexPath) as! UserProfileHeader
         
+        
+        
         header.user = self.user
+        
         let fl:Double = WakeUpManager.shared.fatique
         var str = ""
         if fl < 19.1 {
@@ -340,11 +342,26 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             str = "Low"
         }
         
+        //Set Emergency
+        
+        // thsi update the emergency state of WakeUpManager
+        setEmergency(userID: WakeUpManager.shared.uID) { (emergency, messege, err) in
+            guard let emergencyBool = emergency else {return}
+            guard let msg = messege else {return}
+            WakeUpManager.shared.setEmergency(newValue: emergencyBool)
+            WakeUpManager.shared.setEmergencyMessage(newValue: msg)
+        }
+        
         
         if WakeUpManager.shared.fatique > 89.00 {
             
             handleAlarm()
             //startArlarm()
+        }
+        
+        if WakeUpManager.shared.emergency {
+            handleEmergency(emergencyMessage: WakeUpManager.shared.emergencyMessage)
+            //start Emergency message
         }
         
         let attributedText = NSMutableAttributedString(string: String(WakeUpManager.shared.fatique)+"%\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
@@ -507,6 +524,35 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         }
         
     }
+    // Emergency
+    
+    func setEmergency(userID:String, userCompletionHandler: @escaping (Bool?, String?, Error?)-> Void){
+        
+        print("<<<<<<<<<Returning Emergency JSON Response from WAKE-UP-API with UserID:  >>>>>>>>>>>>>>>>>")
+            var emrg:Bool = false
+        var msg: String = ""
+            guard let url = URL(string: "https://wake-up-api.herokuapp.com/alerts") else {return}
+            print(url)
+            URLSession.shared.dataTask(with: url) { (data, response, error) in
+                guard let data = data else {return}
+                do {
+                    let EmergencyRecords = try JSONDecoder().decode([EmergencyJSON].self, from: data)
+                    print(EmergencyRecords[0].emergency_)
+                    print("Hope not nil")
+                    for i in 0..<EmergencyRecords.count {
+                        if EmergencyRecords[i].uid as! String == userID {
+                            emrg = EmergencyRecords[i].emergency
+                            msg = EmergencyRecords[i].emergency_
+                        }
+                    }
+                    userCompletionHandler(emrg,msg, nil)
+                } catch let jsonErr {
+                    print(jsonErr)
+                }
+                }.resume()
+            
+        }
+    
     
     func  sendRecordTocloud(userID: String, journeyID: String) {
  
@@ -556,6 +602,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         }.resume()
        
     }
+    
 }
 
 
